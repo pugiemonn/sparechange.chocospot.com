@@ -44,16 +44,17 @@ echo $this->Form->input('password',
     )
   )
 );
-echo $this->Form->end(
+echo $this->Form->submit('新規登録',
   array(
-    'type'  => 'submit',
-    'class' => 'btn primary',
+    //'type'  => 'submit',
+    'class' => 'btn success',
     'div'   =>
       array(
         'class' => 'actions',
       )
   )
 );
+echo $this->Form->end();
 
 ?>
 </section>

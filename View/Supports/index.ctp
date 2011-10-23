@@ -16,8 +16,10 @@
     <li class="active"><a href="/users/">新着ユーザー</a></li>
   </ul>
 -->
-  <br class="clear" />
   <div class="">
+    <h3>サイトについて</h3>
+    <p>このサイトは口座情報を共有し、小額資金を募るソーシャル募金プラットフォームです。</p>
+    <h3>使い方</h3>
     <ul class="media-grid">
       <li>
         <a href="#">

@@ -29,15 +29,22 @@ if(isset($login_error) && $login_error === true )
 }
 echo "</div>";
 //echo $form->error('password');
+echo $this->Html->div('actions', null, array());
 echo $this->Form->submit('ログイン',
   array(
     'type'  => 'submit', 
     'class' => 'btn primary',
-    'div'   => array(
+    'div'   => false
+    /*array(
       'class' => 'actions'
-    ),
+    )*/,
   )
 );
+echo '&nbsp;';
+echo '&nbsp;';
+echo $this->Html->tag('span', ' 初めて？早速、登録しよう！', array());
+echo $this->Html->link('>>新規登録', '/users/add', array('class' => ''));
+echo $this->Html->tag('/div');
 echo $this->Form->end();
 
 ?>
