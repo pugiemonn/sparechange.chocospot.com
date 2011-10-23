@@ -8,10 +8,10 @@ App::uses('AppController', 'Controller');
 class SearchsController extends AppController {
   var $uses = array('SparechangePost');
   public function index() {
-    if(isset($this->params['url']['keyword'])) {
+    if(isset($this->request->query['keyword'])) {
       $options = array(
         'conditions' => array(
-          'SparechangePost.comment LIKE' => '%'.$this->params['url']['keyword'].'%',
+          'SparechangePost.comment LIKE' => '%'.$this->request->query['keyword'].'%',
         ),
       );
       //indexと同じ感じで?
@@ -19,7 +19,7 @@ class SearchsController extends AppController {
     }
     else
     {
-      $this->params['url']['keyword'] = "";
+      $this->request->query['keyword'] = "";
       $search_lists = array();
     }
     $this->set('title_for_layout', '検索 | '.SpareChangeTitle);

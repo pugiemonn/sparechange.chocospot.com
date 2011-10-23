@@ -2,13 +2,13 @@
   <div class="page-header">
     <h1>検索
       <small>
-        <?php echo h($this->params['url']['keyword']); ?>の検索結果 
+        <?php echo h($this->request->query['keyword']); ?>の検索結果 
       </small>
     </h1>
   </div>
   <ul class="breadcrumb">
     <li><a href="/">ホーム</a> <span class="divider">></span></li>
-    <li class="active">検索：<?php echo h($this->params['url']['keyword']); ?></li>
+    <li class="active">検索：<?php echo h($this->request->query['keyword']); ?></li>
   </ul>
   <ul class="tabs">
     <li class="active"><a href="/">投稿一覧</a></li>
