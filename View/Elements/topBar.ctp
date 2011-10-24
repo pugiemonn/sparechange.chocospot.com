@@ -53,7 +53,7 @@
           <?php
             echo $this->Form->create('Searchs', 
               array(
-                //'url'    => '/searchs/',
+                'url'    => '/searchs/',
                 'type'   => 'get',
                 'class'  => 'pull-left',
               )
