@@ -13,7 +13,7 @@ echo $this->Form->hidden('user_id', array('value' => ''.$auth_data["id"].''));
 echo $this->Html->div(''. $this->Form->error('SparechangePost.cost') ? "clearfix error" : "clearfix" .'', null, array());
 echo $this->Form->input('cost', 
   array(
-    'label' => '金額(300~10万円)',
+    'label' => '金額(100~10万円)',
     'div'   => false,
   )
 );
