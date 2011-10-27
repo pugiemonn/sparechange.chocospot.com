@@ -36,9 +36,9 @@
         </a>
       </li>
     </ul>
-    <p>
+    <div class="alert-message block-message error">
       登録はコチラから >> <a href="/users/add" class="alert-message error">新規登録</a>
-    </p>
+    </div>
     <h3>ステップは３つ</h3>
     <ol>
       <li>１. 銀行口座を登録
