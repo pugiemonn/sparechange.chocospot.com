@@ -1,4 +1,3 @@
-index
 <section class="posts-index">
   <div class="page-header">
     <h1>新着ユーザー
@@ -18,25 +17,40 @@ index
     </li>
   </ul>
   <br />
-  <div class="">
-    <?php
-    foreach($users as $user)
-    {
-    ?>
-    <div class="userBox">
-      <div class="userImg">
-        <img src="/img/prof.gif" alt="prof-img" width="72" height="72" />      
+  <div>
+    <div class="main-content">
+      <?php
+      foreach($users as $user)
+      {
+      ?>
+      <div class="userBox">
+        <div class="userImg">
+          <img src="/img/prof.gif" alt="prof-img" width="72" height="72" />      
+        </div>
+        <div class="userName">
+          <?php
+            echo $this->Html->link("".h($user['User']['name'])."", "/posts/user/".$user['User']['id']."");
+          ?>
+        </div>
       </div>
-      <div class="userName">
-        <?php
-          echo $this->Html->link("".h($user['User']['name'])."", "/posts/user/".$user['User']['id']."");
-        ?>
-      </div>
+        <br class="clear" />
+      <?php
+      }
+      ?>
     </div>
-      <br class="clear" />
-    <?php
-    }
-    ?>
+    <div class="dashboard">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-7988499766243110";
+        /* chocospotレクタングル */
+        google_ad_slot = "9761195105";
+        google_ad_width = 300;
+        google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
   </div>
   <?php
   //echo $paginator->numbers();
