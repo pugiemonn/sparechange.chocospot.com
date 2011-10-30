@@ -5,7 +5,7 @@
 <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="http://sparechange.chocospot.com/" data-text="現金で誰かを助ける SpareChange" data-via="pugiemonn" data-lang="ja">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsparechange.chocospot.com%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21&amp;appId=246206798731170" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
       </h1>
-      <p>現金で誰かを助ける SpareChange <a href="/supports"><strong><span class="label important">使い方</span></strong></a>
+      <p>現金100円から誰かを助ける SpareChange <a href="/supports"><strong><span class="label important">使い方</span></strong></a>
       <p>銀行口座の情報と、使い道を投稿できる募金募集サイトです。
     </div>
   </div>
