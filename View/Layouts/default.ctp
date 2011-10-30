@@ -57,7 +57,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
   <?php echo $this->element('topBar'); ?>
   <?php echo $this->element('header'); ?>
   <div class="container">
-    <?php echo $content_for_layout; ?>
+    <div id="main">
+      <?php echo $content_for_layout; ?>
+    </div>
+    <!--
+    <div id="footer" class="mini-layout">
+      footer
+    </div>
+    -->
   </div>
         <!--
         <div id="">
@@ -68,7 +75,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 );
             ?>
         </div>-->
-    </div>
-    <?php echo $this->element('sql_dump'); ?>
+</div>
+<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
