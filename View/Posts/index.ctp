@@ -20,7 +20,8 @@
   <div>
     <div class="main-content">
       <?php
-        foreach($post_list as $post) {
+        //foreach($post_list as $post) {
+        foreach($data as $post) {
       ?>
       <div class="posts">
         <div class="postBox">
@@ -54,8 +55,27 @@
         unset($post_list);
         unset($post);
       ?>
+      <div class="pagination">
+        <ul>
+          <?php
+            echo $this->Paginator->prev('← '.__('前', true), array('class'=>'prev', 'tag' => 'li'), "← 前", array('class'=>'prev disabled', 'tag' => 'li'));
+            echo $this->Paginator->numbers(
+              array(
+                'separator' => false,
+                'class'     => '',
+                'tag'       => 'li',
+              ) 
+            );
+            echo $this->Paginator->next(__('次', true).' →', array('class'=>'next', 'tag' => 'li'), "次 →", array('class'=>'next disabled', 'tag' => 'li'));
+            //echo $this->Paginator->next();
+                //echo $this->Paginator->numbers(true);
+                //echo $data->Paginator->counter();
+          ?>
+        </ul>
+      </div>
     </div>
     <div class="dashboard">
+      <div class="alert-message block-message info">
       <script type="text/javascript"><!--
         google_ad_client = "ca-pub-7988499766243110";
         /* chocospotレクタングル */
@@ -67,10 +87,7 @@
       <script type="text/javascript"
         src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
       </script>
+      </div>
     </div>
   </div>
-<?php
-//echo $this->paginator->numbers(true);
-//echo $this->paginator->counter();
-?>
 </section>
