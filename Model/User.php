@@ -12,7 +12,7 @@ class User extends AppModel {
  */
 //  public $displayField = 'name';
   //var $name = "User";
-  var $hasMany = array(
+  public $hasMany = array(
     'SparechangePost' => array(
       'className'  => 'SparechangePost',
       'foreignKey' => 'user_id',
@@ -20,8 +20,14 @@ class User extends AppModel {
       //'foreignKey'    => 'user_id',
       //'conditions' => array('SparechangePost.id' => 'DESC'),
       //'order'      => 'SparechangePost.id DESC',
+    ),
+    'SparechangeComment' => array(
+      'className'  => 'SparechangeComment',
+      'foreignKey' => 'user_id',
+      'limit'      => '10',
     ) 
   );
+
   var $validate = array(
     'name'     => array(
 /*

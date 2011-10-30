@@ -9,6 +9,7 @@ class SparechangePost extends AppModel {
   var $name     = 'SparechangePost';
   public $order = 'SparechangePost.id DESC';  
 
+
   var $validate = array(
     'user_id' => 'notEmpty',
     'comment' => array(
@@ -22,7 +23,6 @@ class SparechangePost extends AppModel {
       )
     ),
     'cost'    => array(
-      //
       'empty' => array(
         'rule'    => 'notEmpty',
         'last'   => true,
@@ -47,6 +47,23 @@ class SparechangePost extends AppModel {
     )
   );
 
+  public $hasMany = array(
+    'SparechnageComment' => array(
+      'className'  => 'SparechangeComment',
+      'foreignKey' => 'sparechange_post_id',
+      'limit'      => '10',
+    ),
+  );
+
+  public $belongsTo = array(
+    'User' => array(
+      'className'  => 'User',
+      'foreignKey' => 'user_id',
+      'conditions' => '',
+      'fields'     => '',
+      'order'      => '',
+    ),
+  );
 
   //カスタムfind
   public function find($type, $options = array()) {
