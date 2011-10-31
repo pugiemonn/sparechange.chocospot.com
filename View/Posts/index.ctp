@@ -67,27 +67,38 @@
               ) 
             );
             echo $this->Paginator->next(__('次', true).' →', array('class'=>'next', 'tag' => 'li'), "次 →", array('class'=>'next disabled', 'tag' => 'li'));
-            //echo $this->Paginator->next();
+                //echo $this->Paginator->next();
                 //echo $this->Paginator->numbers(true);
                 //echo $data->Paginator->counter();
           ?>
         </ul>
       </div>
     </div>
+    <!-- 右カラム -->
     <div class="dashboard">
       <div class="alert-message block-message info">
-      <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-7988499766243110";
-        /* chocospotレクタングル */
-        google_ad_slot = "9761195105";
-        google_ad_width = 300;
-        google_ad_height = 250;
-        //-->
-      </script>
-      <script type="text/javascript"
-        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
+        <script type="text/javascript"><!--
+          google_ad_client = "ca-pub-7988499766243110";
+          /* chocospotレクタングル */
+          google_ad_slot = "9761195105";
+          google_ad_width = 300;
+          google_ad_height = 250;
+          //-->
+        </script>
+        <script type="text/javascript"
+          src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+      </div>
+      <div>
+        <h3>開発ブログ</h3>
+        <?php foreach($blogs as $blog) { ?>
+          <div>
+            <p><?php echo $this->Html->link(h($blog['Blog']['title']), 'http://www.chocospot.com/blogs/articles/'.h($blog['Blog']['id'])); ?></p>
+            <p><?php echo h($blog['Blog']['created']) ?></p>
+          </div>
+        <?php } ?>
       </div>
     </div>
+    <!-- /右カラム -->
   </div>
 </section>

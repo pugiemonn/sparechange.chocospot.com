@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class PostsController extends AppController {
 
-  var $uses = array("SparechangePost", "User");
+  var $uses = array('SparechangePost', 'User', 'Blog');
 
   protected $_types = array(
     'index' => array('index', array('limit' => '20')),//index
@@ -28,14 +28,11 @@ class PostsController extends AppController {
     //アクション名を取得
     $options  = $this->_types[$this->request['action']];
     //$post_list = $this->SparechangePost->find($options[0], $options[1]);
-    $post_list = $this->SparechangePost->find("all");
-    //$this->paginate = $conditions;
-    
     //$this->set('data', $this->paginate('SparechangePost'));
     $data = $this->paginate('SparechangePost');
     $this->set('data', $data);
-    //pr($data);
     //$post_list = $this->paginate();
+    $this->set('blogs', $this->Blog->find('all', array('limit' => '3')));
     $this->set('title_for_layout', SpareChangeTitle);
     $this->set(compact('post_list'));
   }
