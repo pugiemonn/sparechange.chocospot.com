@@ -7,8 +7,12 @@ App::uses('AppController', 'Controller');
  */
 class SupportsController extends AppController {
 
+  public function beforeFilter()
+  {
+    parent::beforeFilter();
+  }
+
   public function index()
   {
-
   }
 }

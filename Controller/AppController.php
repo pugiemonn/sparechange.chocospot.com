@@ -14,7 +14,6 @@ class AppController extends Controller {
     //セッションから取り出したログイン情報をセット
     $auth = $this->Session->read('auth');
     $this->set("auth", $auth);
-
     //ログインされていない場合はログイン画面へ転送
     if($this->needAuth)
     {
@@ -34,6 +33,5 @@ class AppController extends Controller {
       exit();
     }
   }
-
 
 }

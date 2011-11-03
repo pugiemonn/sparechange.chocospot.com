@@ -8,7 +8,8 @@
   </div>
 <?php
 
-echo $this->Form->create('User', array('type' => 'post', 'url' => '/users/login_cmp'));
+echo $this->Form->create('User', array('type' => 'post', 'url' => '/users/login'));
+//echo $this->Form->create('User', array('type' => 'post', 'url' => '/users/login_cmp'));
 echo $this->Html->div(''. $this->Form->error('User.mail') || isset($login_error) && $login_error === true ? "clearfix error" : "clearfix" .'', null, array());
 echo $this->Form->input('mail', array(
     //divを非表示

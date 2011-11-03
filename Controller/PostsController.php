@@ -7,7 +7,8 @@ App::uses('AppController', 'Controller');
  */
 class PostsController extends AppController {
 
-  var $uses = array('SparechangePost', 'User', 'Blog');
+  var $uses      = array('SparechangePost', 'User', 'Blog');
+  var $components = array('Auth');
 
   protected $_types = array(
     'index' => array('index', array('limit' => '20')),//index
@@ -24,10 +25,25 @@ class PostsController extends AppController {
     */
   );
 
+  function beforeFilter() {
+    $this->Auth->allow('*');
+    $this->Auth->deny('add');
+/*
+    $this->Auth->loginAction = array(
+      'controller' => 'users',
+      'aciton'     => 'login',
+    );
+*/
+    //セッションから取り出したログイン情報をセット
+//    $auth = $this->Session->read('auth');
+//    $this->set("auth", $auth);
+    parent::beforeFilter();
+  }
+
+
   public function index() {
     //アクション名を取得
     $options  = $this->_types[$this->request['action']];
-    //$post_list = $this->SparechangePost->find($options[0], $options[1]);
     //$this->set('data', $this->paginate('SparechangePost'));
     $data = $this->paginate('SparechangePost');
     $this->set('data', $data);
@@ -77,7 +93,8 @@ class PostsController extends AppController {
 
   public function add() {
     //セッションチェック
-    $this->checkSession();
+    //$this->Login->hoge();
+    //$this->Login->login_check();
     $auth_data = $this->Session->read("auth");
     //pr($auth_data);
     //echo $auth_data['id'];

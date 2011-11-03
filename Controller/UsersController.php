@@ -13,10 +13,19 @@ class UsersController extends AppController {
  *
  * @var array
  */
-  public $components = array('Security');
+  public $components = array('Security', 'Auth');
+
+  function beforeFilter() {
+    //セッションから取り出したログイン情報をセット
+    $this->Auth->allow('*');
+    $this->Auth->deny('login', 'edit');
+//    $this->Auth->autoRedirect = false;
+    parent::beforeFilter();
+  }
 
   public function index()
   {
+    //pr($this->Session->read("auth"));
     //$this->set('users', $this->paginate());
     $options = array(
       //'conditons' =>
@@ -38,52 +47,52 @@ class UsersController extends AppController {
   public function login()
   {
     $this->set('title_for_layout', 'ログイン | '.SpareChangeTitle);
-    $this->set("login_error", false); //初期表示時はエラー無しとする    
+    //$this->set("login_error", false); //初期表示時はエラー無しとする    
     //これを入れないと/user/loginを見に行く
-    $this->render("/Users/login");
-  }
-
-  public function login_cmp()
-  {
-    $data = array(
-        'mail'     => $this->data['User']['mail'],
-        'password' => $this->data['User']['password']
-      );
-    $this->set('title_for_layout', 'ログイン | '.SpareChangeTitle);
-    //validateするために値をセットする
-    $this->User->set($data);
-    if(!$this->User->validates()) {
-      //値がおかしかった場合はリダイレクト
-      $this->render('/Users/login');
-      return ;
-    }
-
-    $conditions = array(
-      'conditions' => array(
-        'User.mail'     => $this->data['User']['mail'],
-        'User.password' => Security::hash(SALT.$this->data['User']['password'])
-      )
-    );
-    //exit("aa");
-    //ここでログインできるかを判定している
-    $data = $this->User->find('all', $conditions);
-    //データがあるかをチェックする
-    if(count($data) == 0)
+    //$this->render("/Users/login");
+    if(!empty($this->request->data))
     {
-      $this->set('login_error', true);
-      $this->render('/Users/login');
-      return;
+      $data = array(
+          'mail'     => $this->data['User']['mail'],
+          'password' => $this->data['User']['password']
+        );
+      $this->set('title_for_layout', 'ログイン | '.SpareChangeTitle);
+      //validateするために値をセットする
+      $this->User->set($data);
+      if(!$this->User->validates()) {
+        //値がおかしかった場合はリダイレクト
+        $this->render('/Users/login');
+        return ;
+      }
+
+      $conditions = array(
+        'conditions' => array(
+          'User.mail'     => $this->data['User']['mail'],
+          'User.password' => Security::hash(SALT.$this->data['User']['password'])
+        )
+      );
+      //exit("aa");
+      //ここでログインできるかを判定している
+      $data = $this->User->find('all', $conditions);
+      //データがあるかをチェックする
+      if(count($data) == 0)
+      {
+        $this->set('login_error', true);
+        $this->render('/Users/login');
+        return;
+      }
+      //セッションにログイン情報を挿入する
+      $this->Session->write('auth', $data[0]['User']);
+      $this->Auth->login($this->request->data);
+      //pr($this->Session->read('auth'));
+      $this->flash('ログイン成功', '/posts/user/'.$data[0]['User']['id']);
     }
-    //セッションにログイン情報を挿入する
-    $this->Session->write('auth', $data[0]['User']);
-    //pr($this->Session->read('auth'));
-    //
-    $this->flash('ログイン成功', '/posts/user/'.$data[0]['User']['id']);
   }
 
   public function logout()
   {
     $this->Session->delete("auth");
+    $this->Auth->logout();
     $this->flash("さようなら", "/");
   }
 
@@ -141,6 +150,7 @@ class UsersController extends AppController {
         $user_data  = $this->User->find('first', $options);
         //セッションへ書き込み
         $this->Session->write('auth', $user_data['User']);
+        $this->Auth->login($this->request->data);
         //ユーザーのページへリダイレクト
         $this->flash('ユーザー登録が完了しました。', '/posts/user/'.$user_data['User']['id']);
         //returnと書くといいですね。
@@ -153,7 +163,7 @@ class UsersController extends AppController {
   public function edit($id=null)
   {
     //セッションチェック
-    $this->checkSession();
+    //$this->checkSession();
     //セッションデータを読み込み
     $user_data = $this->Session->read('auth');
     //pr($user_data); 
