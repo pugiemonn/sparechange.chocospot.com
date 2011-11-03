@@ -15,7 +15,7 @@ class SearchsController extends AppController {
         ),
       );
       //indexと同じ感じで?
-      $search_lists = $this->SparechangePost->find('index', $options);
+      $search_lists = $this->SparechangePost->find('all', $options);
     }
     else
     {
