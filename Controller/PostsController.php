@@ -35,8 +35,8 @@ class PostsController extends AppController {
     );
 */
     //セッションから取り出したログイン情報をセット
-//    $auth = $this->Session->read('auth');
-//    $this->set("auth", $auth);
+    $auth = $this->Session->read('auth');
+    $this->set("auth", $auth);
     parent::beforeFilter();
   }
 

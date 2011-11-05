@@ -7,6 +7,14 @@ App::uses('AppController', 'Controller');
  */
 class SearchsController extends AppController {
   var $uses = array('SparechangePost');
+
+  function beforeFilter() {
+    //セッションから取り出したログイン情報をセット
+    $auth = $this->Session->read('auth');
+    $this->set("auth", $auth);
+    parent::beforeFilter();
+  }
+
   public function index() {
     if(isset($this->request->query['keyword'])) {
       $options = array(

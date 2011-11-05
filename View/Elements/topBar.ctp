@@ -18,8 +18,8 @@
         ?>
         <?php
           //authがある場合
-          //if(isset($auth)) {
-          if($this->Session->read('auth')) {
+          if(isset($auth)) {
+          //if($this->Session->read('auth')) {
             echo '<li>';
             echo $this->Html->link('マイ情報', '/posts/user/'.h($auth['id']).'');
             echo '</li>';

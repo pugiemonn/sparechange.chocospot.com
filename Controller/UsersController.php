@@ -20,6 +20,8 @@ class UsersController extends AppController {
     $this->Auth->allow('*');
     $this->Auth->deny('login', 'edit');
 //    $this->Auth->autoRedirect = false;
+    $auth = $this->Session->read('auth');
+    $this->set("auth", $auth);
     parent::beforeFilter();
   }
 
