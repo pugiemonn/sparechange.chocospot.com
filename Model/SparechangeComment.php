@@ -13,6 +13,7 @@ class SparechangeComment extends AppModel {
  * @var string
  */
 	public $displayField = 'id';
+    public $order        = 'SparechangeComment.id DESC';
 /**
  * Validation rules
  *

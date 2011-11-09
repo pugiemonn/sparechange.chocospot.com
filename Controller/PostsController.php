@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class PostsController extends AppController {
 
-  var $uses      = array('SparechangePost', 'User', 'Blog');
+  var $uses      = array('SparechangePost', 'User', 'Blog', 'SparechangeComment');
   var $components = array('Auth');
 
   protected $_types = array(
@@ -137,9 +137,11 @@ class PostsController extends AppController {
     $options  = $this->_types[$this->request['action']];
     //投稿のidを渡す
     $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`id`' => $id)));
-    //$post_list = $this->SparechangePost->find($options[0], $options[1]);
-    $post_list = $this->SparechangePost->find("all", $options[1]);
+    //pr($this->request);
+    $comment_list = $this->SparechangeComment->find("all", array('conditions' => array('`SparechangeComment`.`sparechange_post_id`' => $id)));
+    $post_list    = $this->SparechangePost->find("all", $options[1]);
     $this->set('title_for_layout', number_format($post_list[0]['SparechangePost']['cost']).'円( ﾟдﾟ)ﾎｽｨ… | '.SpareChangeTitle);
     $this->set(compact('post_list'));
+    $this->set(compact('comment_list'));
   } 
 }
