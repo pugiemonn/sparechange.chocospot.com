@@ -28,12 +28,7 @@ class PostsController extends AppController {
   function beforeFilter() {
     $this->Auth->allow('*');
     $this->Auth->deny('add');
-/*
-    $this->Auth->loginAction = array(
-      'controller' => 'users',
-      'aciton'     => 'login',
-    );
-*/
+
     //セッションから取り出したログイン情報をセット
     $auth = $this->Session->read('auth');
     $this->set("auth", $auth);
