@@ -8,7 +8,10 @@ App::uses('AppController', 'Controller');
 class PostsController extends AppController {
 
   var $uses      = array('SparechangePost', 'User', 'Blog', 'SparechangeComment');
-  var $components = array('Auth');
+  var $components = array('Auth', 'Security');
+  //public $helpers = array('Js' => array('Jquery'));
+  public $helpers = array('Js');
+
 
   protected $_types = array(
     'index' => array('index', array('limit' => '20')),//index
@@ -28,6 +31,9 @@ class PostsController extends AppController {
   function beforeFilter() {
     $this->Auth->allow('*');
     $this->Auth->deny('add');
+
+    //CSRF対策
+    $this->Security->requireAuth('add');
 
     //セッションから取り出したログイン情報をセット
     $auth = $this->Session->read('auth');
@@ -91,7 +97,7 @@ class PostsController extends AppController {
     //$this->Login->hoge();
     //$this->Login->login_check();
     $auth_data = $this->Session->read("auth");
-    //pr($auth_data);
+    //pr($this->request);
     //echo $auth_data['id'];
     $this->set('auth_data', $auth_data);
     $this->set('title_for_layout', '欲しい額を投稿 | '.SpareChangeTitle);
