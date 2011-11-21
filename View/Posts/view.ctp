@@ -6,7 +6,7 @@
   <br class="clear" />  
   <ul>
     <li>
-      <?php echo $this->Html->link("欲しい額を投稿する", "/posts/add", array('class' => 'btn primary'));?>
+      <?php //echo $this->Html->link("欲しい額を投稿する", "/posts/add", array('class' => 'btn primary'));?>
     </li>
   </ul>
   <br class="clear" />
@@ -27,13 +27,12 @@
         </ul>
         <p><?php echo h($post['SparechangePost']['comment']); ?></p>
         <ul>
-          <!--
           <li>
-            <a href="#">コメントする</a>
+          <?php //echo $this->Html->link("".h($post['SparechangePost']['created'])."", "/posts/view/".$post['SparechangePost']['id'].""); ?>
+          <?php echo h($post['SparechangePost']['created']); ?>
           </li>
-          -->
           <li>
-          <?php echo $this->Html->link("".h($post['SparechangePost']['created'])."", "/posts/view/".$post['SparechangePost']['id'].""); ?>
+            <?php echo $this->Html->link('コメント('.count($post['SparechnageComment']).')', '/posts/view/'.$post['SparechangePost']['id'], ''); ?> 
           </li>
         </ul>
       </div>
@@ -53,7 +52,8 @@
     <?php
       echo $this->Form->create('Comment',
         array(
-          'url' => '/comments/add'
+          'url'  => '/comments/add',
+          'type' => 'get',
         )
       );
       echo $this->Form->input('user_id',
@@ -70,22 +70,78 @@
       );
       echo $this->Form->input('comment', 
         array(
+          'id'    => 'comment',
           'label' => false,
           'div'   => false,
+          'placeholder' => 'コメント'
         )
       );
-      echo $this->Form->submit('コメントする',
+      echo '<br />';
+      echo $this->Form->button('コメントする',
         array(
+          'id'    => 'submit',
+          //'type'  => 'btn',
           'class' => 'btn',
+          'div'   => false,
+          'style' => 'margin-top:2px;',
+          /*
           'div'   => array(
             'class' => ''
           ),
+          */
         )
       );
+      echo "&nbsp;&nbsp;";
+      if(!isset($auth))
+      {
+        echo $this->Html->tag("span", "(コメントには".$this->Html->link('ログイン', '/users/login/')."が必要です)");
+      }
       echo $this->Form->end();
     ?>
+    <script type="text/javascript">
+      //<![CDATA[
+      $("#submit").bind("click", function (event) {
+        var str = $('#comment').val();
+        $('#comment').val("");
+        //$.ajax({dataType:"html", success:function (data, textStatus) {$("#hoge").animate({height: "100%", opacity: "1.0"},"slow").after(data);}, sync:true, type:"get", url:"\/comments\/add\/comment:" + str + "\/user_id:<?php echo h($auth['id']); ?>\/sparechange_post_id:<?php echo h($this->request->params['pass'][0]); ?>"});
+        $.ajax({dataType:"html", success:function (data, textStatus) {$("#hoge").after(data).fadeIn('slow');}, sync:true, type:"get", url:"\/comments\/add\/comment:" + str + "\/user_id:<?php echo h($auth['id']); ?>\/sparechange_post_id:<?php echo h($this->request->params['pass'][0]); ?>"});
+        //alert(str + "aa");
+        return false;
+      });
+      //]]>
+    </script>  
+    
+   
     <?php
-      //foreach($post_list[0]['SparechnageComment'] as $comment)
+      //echo $this->Form->end();
+/*
+      $this->Js->get('#btn');
+         $request = $this->Js->request(
+          array(
+            'action' => 'add_test',
+            'controller' => 'comments',
+            'asin'   => 'hugahuga',  
+            //'asin' => ''.$result->Items->Item->ASIN.''
+            #'action' => 'index',
+            #'controller' => 'hoge'
+          ),
+          array(
+            //'method' => 'get',
+            'method' => 'POST',
+            'sync' => true,
+            'update' => '#hoge',
+            //'type' => 'html',
+            //'success' => "alert('get data!!!');"
+          )
+        );
+
+
+      $this->Js->event('click',$request);
+      echo $this->Js->writeBuffer();
+*/
+    ?>
+    <div id="hoge"><!--hoge--></div>
+    <?php
       foreach($comment_list as $comment)
       {
     ?>

@@ -10,7 +10,7 @@ class PostsController extends AppController {
   var $uses      = array('SparechangePost', 'User', 'Blog', 'SparechangeComment');
   var $components = array('Auth', 'Security');
   //public $helpers = array('Js' => array('Jquery'));
-  public $helpers = array('Js');
+  public $helpers = array('Js', 'Chart', 'ScheduleTable');
 
 
   protected $_types = array(
@@ -38,7 +38,7 @@ class PostsController extends AppController {
     //セッションから取り出したログイン情報をセット
     $auth = $this->Session->read('auth');
     $this->set("auth", $auth);
-    parent::beforeFilter();
+    //parent::beforeFilter();
   }
 
 
@@ -51,7 +51,6 @@ class PostsController extends AppController {
     //$post_list = $this->paginate();
     $this->set('blogs', $this->Blog->find('all', array('limit' => '3')));
     $this->set('title_for_layout', SpareChangeTitle);
-    $this->set(compact('post_list'));
   }
 
   public function user($id=null)
@@ -146,6 +145,7 @@ class PostsController extends AppController {
     //pr($this->request);
     $comment_list = $this->SparechangeComment->find("all", array('conditions' => array('`SparechangeComment`.`sparechange_post_id`' => $id)));
     $post_list    = $this->SparechangePost->find("all", $options[1]);
+    //pr($post_list);
     $this->set('title_for_layout', number_format($post_list[0]['SparechangePost']['cost']).'円( ﾟдﾟ)ﾎｽｨ… | '.SpareChangeTitle);
     $this->set(compact('post_list'));
     $this->set(compact('comment_list'));

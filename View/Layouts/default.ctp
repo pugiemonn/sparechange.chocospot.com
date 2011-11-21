@@ -31,7 +31,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         echo $this->Html->meta('icon');
         //echo $this->Html->css(array('cake.generic', 'sparechange'));
         echo $this->Html->css(array('sparechange', 'bootstrap'));
-        echo $this->Html->script(array('jquery.min.js'));
+        echo $this->Html->script(array('jquery.min.js', 'bootstrap-alerts.js'));
         echo $scripts_for_layout;
     ?>
 <!--[if lt IE 9]>
