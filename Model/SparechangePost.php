@@ -51,7 +51,7 @@ class SparechangePost extends AppModel {
     'SparechnageComment' => array(
       'className'  => 'SparechangeComment',
       'foreignKey' => 'sparechange_post_id',
-      'limit'      => '10',
+      //'limit'      => '10',
     ),
   );
 
