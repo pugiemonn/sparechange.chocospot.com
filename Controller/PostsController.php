@@ -10,7 +10,7 @@ class PostsController extends AppController {
   var $uses      = array('SparechangePost', 'User', 'Blog', 'SparechangeComment');
   var $components = array('Auth', 'Security');
   //public $helpers = array('Js' => array('Jquery'));
-  public $helpers = array('Js', 'Chart', 'ScheduleTable');
+  public $helpers = array('Js');
 
 
   protected $_types = array(
@@ -19,14 +19,14 @@ class PostsController extends AppController {
     'view'  => array('view', array('limit' => '1')),
   );
 
+    /*
   var $paginate = array(        
     'limit' => 20,
-    /*
     'order' => array(
       'SparechangePost.id' => 'asc'
     )
-    */
   );
+    */
 
   function beforeFilter() {
     $this->Auth->allow('*');
@@ -46,8 +46,11 @@ class PostsController extends AppController {
     //アクション名を取得
     $options  = $this->_types[$this->request['action']];
     //$this->set('data', $this->paginate('SparechangePost'));
-    $data = $this->paginate('SparechangePost');
-    $this->set('data', $data);
+    //$data = $this->paginate('SparechangePost');
+    $this->paginate = array('limit' => 20);
+    //$post_list = $this->paginate('SparechangePost');
+    $post_list = $this->SparechangePost->find('all');
+    $this->set('post_list', $post_list);
     //$post_list = $this->paginate();
     $this->set('blogs', $this->Blog->find('all', array('limit' => '3')));
     $this->set('title_for_layout', SpareChangeTitle);

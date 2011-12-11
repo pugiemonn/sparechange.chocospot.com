@@ -20,8 +20,8 @@
   <div>
     <div class="main-content">
       <?php
-        //foreach($post_list as $post) {
-        foreach($data as $post) {
+        foreach($post_list as $post) {
+        //foreach($data as $post) {
       ?>
       <div class="posts">
         <div class="postBox">
@@ -37,13 +37,11 @@
             </ul>
             <p><?php echo h($post['SparechangePost']['comment']); ?></p>
             <ul>
-              <!--
               <li>
-                <a href="#">コメントする</a>
+                <?php echo h($post['SparechangePost']['created']); ?>
               </li>
-              -->
               <li>
-                <?php echo $this->Html->link("".h($post['SparechangePost']['created'])."", "/posts/view/".$post['SparechangePost']['id'].""); ?>
+                <?php echo $this->Html->link('コメント('.count($post['SparechnageComment']).')', '/posts/view/'.$post['SparechangePost']['id'], ''); ?>
               </li>
             </ul>
           </div>
@@ -58,7 +56,8 @@
       <div class="pagination">
         <ul>
           <?php
-            echo $this->Paginator->prev('← '.__('前', true), array('class'=>'prev', 'tag' => 'li'), "← 前", array('class'=>'prev disabled', 'tag' => 'li'));
+            //echo $this->Paginator->prev('← '.__('前', true), array('class'=>'prev', 'tag' => 'li'), "← 前", array('class'=>'prev disabled', 'tag' => 'li'));
+            /*
             echo $this->Paginator->numbers(
               array(
                 'separator' => false,
@@ -66,7 +65,8 @@
                 'tag'       => 'li',
               ) 
             );
-            echo $this->Paginator->next(__('次', true).' →', array('class'=>'next', 'tag' => 'li'), "次 →", array('class'=>'next disabled', 'tag' => 'li'));
+            */
+            //echo $this->Paginator->next(__('次', true).' →', array('class'=>'next', 'tag' => 'li'), "次 →", array('class'=>'next disabled', 'tag' => 'li'));
                 //echo $this->Paginator->next();
                 //echo $this->Paginator->numbers(true);
                 //echo $data->Paginator->counter();
@@ -97,6 +97,7 @@
             <p><?php echo h($blog['Blog']['created']) ?></p>
           </div>
         <?php } ?>
+        <p class="text-right"><a href="http://www.chocospot.com/blogs/">>> もっとみる</a></p>
       </div>
     </div>
     <!-- /右カラム -->
