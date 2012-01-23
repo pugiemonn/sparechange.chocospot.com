@@ -48,6 +48,7 @@
     ?>
   </div>
   <div class="comments">
+<!--
     <h3>どう思いますか？</h3>
     <?php
       echo $this->Form->create('Comment',
@@ -111,7 +112,7 @@
       //]]>
     </script>  
     
-   
+   -->
     <?php
       //echo $this->Form->end();
 /*

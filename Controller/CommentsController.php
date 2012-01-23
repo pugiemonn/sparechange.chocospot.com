@@ -40,6 +40,7 @@ class CommentsController extends AppController {
     $this->set(compact('post_list'));
   }
 
+/*
   //JSからgetで呼ぶ
   //
   public function add()
@@ -86,6 +87,7 @@ class CommentsController extends AppController {
       }
     }      
   }
+*/
 
   //ポストで投稿できる
   public function add_post()
