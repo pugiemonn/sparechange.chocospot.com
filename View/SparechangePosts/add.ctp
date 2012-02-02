@@ -7,7 +7,14 @@
     </h1>
   </div>
 <?php
-echo $this->Form->create('Post');
+echo $this->Form->create('Post', 
+  array(
+/*
+    'controller' => 'sparechage_posts',
+    'action'     => 'add',
+*/
+  )
+);
 //echo $form->select('user_id', array('1' => 1), 1);
 echo $this->Form->hidden('user_id', array('value' => ''.$auth_data["id"].''));
 echo $this->Html->div(''. $this->Form->error('SparechangePost.cost') ? "clearfix error" : "clearfix" .'', null, array());

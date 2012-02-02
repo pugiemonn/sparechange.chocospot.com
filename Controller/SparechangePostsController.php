@@ -5,10 +5,11 @@ App::uses('AppController', 'Controller');
  *
  * @property Post $Post
  */
-class PostsController extends AppController {
+class SparechangePostsController extends AppController {
 
   var $uses      = array('SparechangePost', 'User', 'Blog', 'SparechangeComment');
-  var $components = array('Auth', 'Security');
+  var $components = array('Auth', 'Security' => array('csrfExpires' => '+1 hour'));
+  //var $components = array('Auth');
   //public $helpers = array('Js' => array('Jquery'));
   public $helpers = array('Js');
 
@@ -30,6 +31,7 @@ class PostsController extends AppController {
 
   function beforeFilter() {
     $this->Auth->allow('*');
+    //$this->Auth->allow(array('*', 'test', 'readJs'));
     $this->Auth->deny('add');
 
     //CSRF対策
@@ -38,7 +40,13 @@ class PostsController extends AppController {
     //セッションから取り出したログイン情報をセット
     $auth = $this->Session->read('auth');
     $this->set("auth", $auth);
-    //parent::beforeFilter();
+    parent::beforeFilter();
+//    $this->Security->csrfExpires = '+1 hour';
+ //   $this->Security->requirePost('readJs');
+//    $this->Security->disabledFields = array('readJs');
+//    $this->Security->disabledFields = 'readJs';
+//      $this->Security->disabledFields[] = 'Post.name';
+//    $this->Security->validatePost = '';
   }
 
 
@@ -58,6 +66,7 @@ class PostsController extends AppController {
 
   public function user($id=null)
   {
+    $id        = $this->request->params['id'];
     $user_data = array();
     $options   = array(
       'conditions' => array(
@@ -89,15 +98,11 @@ class PostsController extends AppController {
     $post_list = $this->SparechangePost->find("all", $options[1]);
     $this->set('auth', $this->Session->read('auth'));
     $this->set('title_for_layout', $user_info['User']['name'].'の情報 | '.SpareChangeTitle);
-    $this->set(compact('user_info'));
-    $this->set(compact('user_data'));
-    $this->set(compact('post_list'));
+    $this->set(compact('post_list', 'user_data', 'user_info'));
   }
 
   public function add() {
     //セッションチェック
-    //$this->Login->hoge();
-    //$this->Login->login_check();
     $auth_data = $this->Session->read("auth");
     //pr($this->request);
     //echo $auth_data['id'];
@@ -119,7 +124,6 @@ class PostsController extends AppController {
 //        pr($data);
         $this->SparechangePost->set($data);
         //pr($this->SparechangePost);
-        //exit();
         if(!$this->SparechangePost->validates())
         {
           //validateでエラーがある場合
@@ -130,10 +134,12 @@ class PostsController extends AppController {
         //モデル名が違うから指定しないといけない?
         if($this->SparechangePost->save($data, false))
         {   
-          $this->flash("投稿しました", "/posts");
+          $this->redirect('/');
+          //$this->flash("投稿しました", "/posts");
         }
       }
     }  
+    $this->render('/SparechangePosts/add');
   }
 
   function delete()
@@ -144,13 +150,33 @@ class PostsController extends AppController {
   {
     $options  = $this->_types[$this->request['action']];
     //投稿のidを渡す
+    $id         = $this->request->params['id'];
     $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`id`' => $id)));
     //pr($this->request);
     $comment_list = $this->SparechangeComment->find("all", array('conditions' => array('`SparechangeComment`.`sparechange_post_id`' => $id)));
     $post_list    = $this->SparechangePost->find("all", $options[1]);
     //pr($post_list);
     $this->set('title_for_layout', number_format($post_list[0]['SparechangePost']['cost']).'円( ﾟдﾟ)ﾎｽｨ… | '.SpareChangeTitle);
+    $this->set(compact('post_list', 'comment_list'));
+  } 
+
+  public function test($id=2)
+  {
+    $options  = $this->_types['view'];
+    //投稿のidを渡す
+    $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`id`' => $id)));
+    //pr($options);
+    $comment_list = $this->SparechangeComment->find("all", array('conditions' => array('`SparechangeComment`.`sparechange_post_id`' => $id)));
+    $post_list    = $this->SparechangePost->find("all", $options[1]);
+    //pr($post_list);
+    $this->set('title_for_layout', number_format($post_list[0]['SparechangePost']['cost']).'円( ﾟдﾟ)ﾎｽｨ… | '.SpareChangeTitle);
     $this->set(compact('post_list'));
     $this->set(compact('comment_list'));
-  } 
+  }
+
+  public function readJs()
+  {
+    exit("hugahuga");
+  }
+
 }
