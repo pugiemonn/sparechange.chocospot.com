@@ -2,7 +2,7 @@
   <div class="page-header">
     <h1>新規登録
       <small>
-        ユーザー登録を行います。
+        会員登録すると情報を投稿できます。<br />会員登録をすると<a href="http://chocospot.com/" target="_blank">chocospot.com</a>内の全てのサービスで利用可能なIDが発行されます。
       </small>
     </h1>
   </div>
