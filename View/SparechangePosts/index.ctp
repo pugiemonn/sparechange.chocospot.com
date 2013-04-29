@@ -26,8 +26,11 @@
       <div class="posts">
         <div class="postBox">
           <div class="postCost">
+<!--
             <p><?php echo h(number_format($post['SparechangePost']['cost'])); ?><span>円</span></p>
             <p class="kaomoji">( ﾟдﾟ)ﾎｽｨ…</p>
+-->
+            <p><a href="<?php echo '/posts/view/'.$post['SparechangePost']['id']; ?>" class="amount-of-money-this-person-needs"><?php echo h(number_format($post['SparechangePost']['cost'])); ?><span>円</span><br /><span class="kaomoji" style="font-size:16px;">( ﾟдﾟ)ﾎｽｨ…</span></a></p>
           </div>
           <div class="postText">
             <ul>
@@ -56,8 +59,8 @@
       <div class="pagination">
         <ul>
           <?php
-            //echo $this->Paginator->prev('← '.__('前', true), array('class'=>'prev', 'tag' => 'li'), "← 前", array('class'=>'prev disabled', 'tag' => 'li'));
-            /*
+            echo $this->Paginator->prev('← '.__('前', true), array('class'=>'prev', 'tag' => 'li'), "← 前", array('class'=>'prev disabled', 'tag' => 'li'));
+            
             echo $this->Paginator->numbers(
               array(
                 'separator' => false,
@@ -65,7 +68,7 @@
                 'tag'       => 'li',
               ) 
             );
-            */
+            
             //echo $this->Paginator->next(__('次', true).' →', array('class'=>'next', 'tag' => 'li'), "次 →", array('class'=>'next disabled', 'tag' => 'li'));
                 //echo $this->Paginator->next();
                 //echo $this->Paginator->numbers(true);
